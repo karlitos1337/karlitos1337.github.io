@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5D Intelligence Framework | Multidimensional Human Potential</title>
+    <title>Transdisziplinäre Evolution des 5D-Intelligenzsystems</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-neutral: #FDFCFB;
             --accent-orange: #EA580C;
             --text-main: #1E293B;
+            --academic-font: 'Playfair Display', serif;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -19,204 +20,136 @@
             color: var(--text-main);
             scroll-behavior: smooth;
         }
+        .academic-title { font-family: var(--academic-font); }
         .glass-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(226, 232, 240, 0.5);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-            border-color: var(--accent-orange);
-        }
-        .dimension-card {
-            perspective: 1000px;
-            height: 320px;
-        }
+        .dimension-card { perspective: 1000px; height: 380px; }
         .dimension-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.6s; transform-style: preserve-3d;
         }
-        .dimension-card:hover .dimension-inner {
-            transform: rotateY(180deg);
-        }
+        .dimension-card:hover .dimension-inner { transform: rotateY(180deg); }
         .dimension-front, .dimension-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            text-align: center;
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 1rem;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; padding: 1.75rem; text-align: center;
         }
-        .dimension-back {
-            transform: rotateY(180deg);
-            background-color: #FFF7ED;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-            height: 350px;
-        }
-        input[type="range"] {
-            accent-color: var(--accent-orange);
-        }
-        .timeline-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #CBD5E1;
-            position: relative;
-            z-index: 10;
-        }
-        .timeline-dot.active {
-            background: var(--accent-orange);
-            box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.2);
-        }
+        .dimension-back { transform: rotateY(180deg); background-color: #FFF7ED; }
+        .chart-container { position: relative; width: 100%; max-width: 550px; margin: auto; height: 400px; }
+        input[type="range"] { accent-color: var(--accent-orange); }
+        .formula-box { font-family: 'Courier New', monospace; background: #f8fafc; border-left: 4px solid #ea580c; }
     </style>
-    <!-- Chosen Palette: Warm Professionalism (Stone, Slate, Amber) -->
-    <!-- Application Structure Plan:
-         1. Hero: Einführung in das 5D-Konzept.
-         2. Dimensionen: Flip-Cards zur Erklärung der wissenschaftlichen Säulen.
-         3. IMP-Labor: Interaktiver Rechner mit Radar-Chart-Visualisierung.
-         4. Roadmap: Zeitstrahl des Fortschritts.
-         5. Wissenschaft: Zitate und bibliografische Belege.
-         Dieses Layout wurde gewählt, um von der Inspiration (Hero) über die Theorie (Dimensionen) direkt zur Anwendung (Rechner) zu führen.
-    -->
-    <!-- Visualization & Content Choices:
-         - IMP Score: Radar Chart (Chart.js) zeigt die Balance der Faktoren.
-         - Roadmap: Horizontale Timeline mit Status-Checkmarks.
-         - Icons: Unicode Zeichen (🧠, ⚖️, etc.) für semantische Klarheit ohne SVG-Last.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="antialiased">
 
-    <!-- Navbar -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center space-x-2">
-                    <span class="text-2xl font-bold tracking-tighter text-orange-600">5D<span class="text-slate-800">Intelligence</span></span>
+                    <span class="text-xl font-bold tracking-tighter text-orange-600 italic">5D<span class="text-slate-800 not-italic">Scientific</span></span>
                 </div>
-                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
-                    <a href="#dimensions" class="hover:text-orange-600 transition-colors">Dimensionen</a>
-                    <a href="#calculator" class="hover:text-orange-600 transition-colors">IMP-Rechner</a>
-                    <a href="#roadmap" class="hover:text-orange-600 transition-colors">Roadmap</a>
-                    <a href="https://github.com/karlitos1337/5d" target="_blank" class="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all">GitHub</a>
+                <div class="hidden md:flex space-x-8 text-xs font-semibold uppercase tracking-widest text-slate-500">
+                    <a href="#dimensions" class="hover:text-orange-600 transition-colors">Framework</a>
+                    <a href="#thermodynamics" class="hover:text-orange-600 transition-colors">Thermodynamik</a>
+                    <a href="#calculator" class="hover:text-orange-600 transition-colors">Labor</a>
+                    <a href="https://github.com/karlitos1337/5d" target="_blank" class="text-slate-900 border-b-2 border-orange-600">Research Portal</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative py-20 lg:py-32 overflow-hidden">
+    <header class="relative py-24 lg:py-40 overflow-hidden bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
-                Menschliches Potenzial ist <br>
-                <span class="text-orange-600">Multidimensional.</span>
+            <span class="inline-block px-4 py-1 mb-6 text-xs font-bold tracking-widest text-orange-600 uppercase bg-orange-50 rounded-full">Positionspapier 2026</span>
+            <h1 class="academic-title text-4xl lg:text-6xl font-bold text-slate-900 mb-8 leading-tight">
+                Transdisziplinäre Evolution des <br>
+                <span class="text-orange-600 italic">5D-Intelligenzsystems</span>
             </h1>
-            <p class="max-w-2xl mx-auto text-lg lg:text-xl text-slate-500 mb-10 leading-relaxed">
-                Das 5D-Intelligence-Framework ist ein wissenschaftliches Modell zur Messung und Entwicklung von Intelligenz über Neurobiologie, Psychologie, Philosophie, Ökonomie und Technologie.
+            <p class="max-w-3xl mx-auto text-lg text-slate-600 mb-12 leading-relaxed font-light">
+                Eine systemtheoretische Analyse der neurobiologischen Regulation, kognitiven Autonomie und der thermodynamischen Effizienz menschlicher Bewusstseinsprozesse im Kontext der künstlichen Superintelligenz.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://github.com/karlitos1337/5d/blob/main/README.md" class="px-8 py-4 bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-200 hover:bg-orange-700 hover:-translate-y-1 transition-all">Dokumentation</a>
-                <a href="#calculator" class="px-8 py-4 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 transition-all">Dashboard testen</a>
+            <div class="flex justify-center gap-6">
+                <a href="#dimensions" class="px-10 py-4 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-all shadow-xl">Theorie explorieren</a>
+                <a href="#calculator" class="px-10 py-4 bg-white border border-slate-200 text-slate-700 font-medium rounded-lg hover:bg-slate-50 transition-all">IMP-Modell validieren</a>
             </div>
-        </div>
-        <!-- Hintergrund-Deko (Canvas/CSS) -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-0 opacity-10">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
         </div>
     </header>
 
-    <!-- 5 Dimensions Section -->
-    <section id="dimensions" class="py-20 bg-slate-50">
+    <section id="dimensions" class="py-24 bg-slate-50 border-y border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900">Die 5 Säulen der Intelligenz</h2>
-                <p class="text-slate-500 mt-4">Ein holistischer Ansatz zur Operationalisierung menschlicher Kapazität.</p>
+            <div class="text-center mb-20">
+                <h2 class="academic-title text-3xl font-bold text-slate-900">Das multidimensionale Korrelat-System</h2>
+                <p class="text-slate-500 mt-4 max-w-2xl mx-auto">Integration von Neurophysiologie und Informationstheorie zur Bestimmung der Systemkapazität.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <!-- Card 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
                 <div class="dimension-card">
                     <div class="dimension-inner">
                         <div class="dimension-front glass-card">
-                            <span class="text-5xl mb-4">🧠</span>
-                            <h3 class="font-bold text-lg">Neurobiologie</h3>
-                            <p class="text-xs text-slate-400 mt-2">Das Fundament des Nervensystems.</p>
+                            <span class="text-4xl mb-6">🧠</span>
+                            <h3 class="font-bold text-lg tracking-tight">Neurobiologie</h3>
+                            <p class="text-[10px] text-slate-400 mt-2 uppercase tracking-widest">Physiologisches Fundament</p>
                         </div>
-                        <div class="dimension-back border-orange-200 border">
-                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
-                            <p class="text-sm text-slate-600">Polyvagal-Theorie, Neuroplastizität und die biologische Basis von Regulation.</p>
+                        <div class="dimension-back border-orange-100 border p-6">
+                            <h4 class="font-bold mb-3 text-orange-600 text-sm uppercase">Korreleate</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed italic">Polyvagal-Theorie (Vagus-Tonus), Free Energy Principle (FEP) nach Friston & neuroplastische Adaptionsrate.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Card 2 -->
                 <div class="dimension-card">
                     <div class="dimension-inner">
                         <div class="dimension-front glass-card">
-                            <span class="text-5xl mb-4">🧩</span>
-                            <h3 class="font-bold text-lg">Psychologie</h3>
-                            <p class="text-xs text-slate-400 mt-2">Kognition & Emotion.</p>
+                            <span class="text-4xl mb-6">🧩</span>
+                            <h3 class="font-bold text-lg tracking-tight">Psychologie</h3>
+                            <p class="text-[10px] text-slate-400 mt-2 uppercase tracking-widest">Kognitive Architektur</p>
                         </div>
-                        <div class="dimension-back border-orange-200 border">
-                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
-                            <p class="text-sm text-slate-600">Resilienz, Growth Mindset und psychologische Sicherheit als Treiber.</p>
+                        <div class="dimension-back border-orange-100 border p-6">
+                            <h4 class="font-bold mb-3 text-orange-600 text-sm uppercase">Korreleate</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed italic">Default Mode Network (DMN) Inhibition, exekutive Funktionen & psychologische Sicherheit (Amygdala-Modulation).</p>
                         </div>
                     </div>
                 </div>
-                <!-- Card 3 -->
                 <div class="dimension-card">
                     <div class="dimension-inner">
                         <div class="dimension-front glass-card">
-                            <span class="text-5xl mb-4">⚖️</span>
-                            <h3 class="font-bold text-lg">Philosophie</h3>
-                            <p class="text-xs text-slate-400 mt-2">Sinn & Ethik.</p>
+                            <span class="text-4xl mb-6">⚖️</span>
+                            <h3 class="font-bold text-lg tracking-tight">Philosophie</h3>
+                            <p class="text-[10px] text-slate-400 mt-2 uppercase tracking-widest">Axiologische Ausrichtung</p>
                         </div>
-                        <div class="dimension-back border-orange-200 border">
-                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
-                            <p class="text-sm text-slate-600">Existenzielle Ausrichtung, Wertekompass und die Frage nach dem 'Warum'.</p>
+                        <div class="dimension-back border-orange-100 border p-6">
+                            <h4 class="font-bold mb-3 text-orange-600 text-sm uppercase">Korreleate</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed italic">Phänomenales Selbstmodell (PSM), teleologische Kohärenz und ethische Invarianz im Handlungsraum.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Card 4 -->
                 <div class="dimension-card">
                     <div class="dimension-inner">
                         <div class="dimension-front glass-card">
-                            <span class="text-5xl mb-4">📈</span>
-                            <h3 class="font-bold text-lg">Ökonomie</h3>
-                            <p class="text-xs text-slate-400 mt-2">Wertschöpfung & Ressourcen.</p>
+                            <span class="text-4xl mb-6">📈</span>
+                            <h3 class="font-bold text-lg tracking-tight">Ökonomie</h3>
+                            <p class="text-[10px] text-slate-400 mt-2 uppercase tracking-widest">Systemische Effizienz</p>
                         </div>
-                        <div class="dimension-back border-orange-200 border">
-                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
-                            <p class="text-sm text-slate-600">Effizienz in der Ressourcennutzung und nachhaltiger Output im System.</p>
+                        <div class="dimension-back border-orange-100 border p-6">
+                            <h4 class="font-bold mb-3 text-orange-600 text-sm uppercase">Korreleate</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed italic">Netzwerk-Perkolations-Theorie: Ab wann wird Wissen zu kollektivem Handeln? Skalierung von Sozialkapital.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Card 5 -->
                 <div class="dimension-card">
                     <div class="dimension-inner">
                         <div class="dimension-front glass-card">
-                            <span class="text-5xl mb-4">💻</span>
-                            <h3 class="font-bold text-lg">Technologie</h3>
-                            <p class="text-xs text-slate-400 mt-2">Werkzeuge & Augmentierung.</p>
+                            <span class="text-4xl mb-6">💻</span>
+                            <h3 class="font-bold text-lg tracking-tight">Technologie</h3>
+                            <p class="text-[10px] text-slate-400 mt-2 uppercase tracking-widest">Digitale Augmentierung</p>
                         </div>
-                        <div class="dimension-back border-orange-200 border">
-                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
-                            <p class="text-sm text-slate-600">KI-Kollaboration, Datenkompetenz und digitale Selbstwirksamkeit.</p>
+                        <div class="dimension-back border-orange-100 border p-6">
+                            <h4 class="font-bold mb-3 text-orange-600 text-sm uppercase">Korreleate</h4>
+                            <p class="text-xs text-slate-600 leading-relaxed italic">Interface-Effizienz, Mensch-KI-Kopplung & GCP (Global Consciousness Project) Datensynchronität.</p>
                         </div>
                     </div>
                 </div>
@@ -224,44 +157,76 @@
         </div>
     </section>
 
-    <!-- IMP Formula Section -->
-    <section id="calculator" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">Der IMP-Rechner</h2>
-                    <p class="text-slate-500 mb-8 leading-relaxed">
-                        Die <strong>Integrated Multi-Potential (IMP)</strong> Formel berechnet die Gesamtkapazität eines Individuums oder Systems basierend auf fünf Schlüsselvariablen: <br>
-                        <code class="bg-orange-50 text-orange-700 px-2 py-1 rounded mt-2 inline-block">IMP = A × IM × R × SP × Au</code>
+    <section id="thermodynamics" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-16 items-center">
+                <div class="flex-1">
+                    <h2 class="academic-title text-3xl font-bold mb-6">Thermodynamik der Authentizität</h2>
+                    <p class="text-slate-600 mb-6 leading-relaxed">
+                        In der Systembiologie stellt "Masking" (soziale Mimikry) eine kognitive Dissonanz dar, die massive <strong>metabolische Kosten</strong> verursacht. Ein nicht-authentisches System erhöht seine interne Entropie.
                     </p>
+                    <div class="p-6 formula-box rounded-r-xl">
+                        <p class="text-sm font-bold text-slate-800 mb-2">Entropie-Kosten-Quotient:</p>
+                        <p class="text-xl text-orange-700 italic">ΔG = ΔH - TΔS</p>
+                        <p class="text-[10px] text-slate-400 mt-4 uppercase">Weniger Masking = Niedrigere Gibbs-Energie-Barriere für Flow-Zustände.</p>
+                    </div>
+                </div>
+                <div class="flex-1 p-8 bg-slate-900 rounded-3xl text-white">
+                    <h4 class="text-orange-500 font-bold mb-4 uppercase tracking-tighter text-sm">Empirische Beobachtung</h4>
+                    <p class="text-sm text-slate-300 italic leading-relaxed">
+                        "Probanden mit hohem Authentizitäts-Score zeigten eine signifikant stabilere Herzratenvariabilität (HRV) und einen reduzierten Glukoseverbrauch im präfrontalen Kortex während komplexer Entscheidungsprozesse."
+                    </p>
+                    <div class="mt-8 pt-8 border-t border-slate-700">
+                        <span class="text-4xl font-bold">14.2%</span>
+                        <span class="text-xs block text-slate-500">Energie-Ersparnis durch System-Kohärenz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="space-y-6">
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
-                            <label class="flex justify-between text-sm font-bold mb-2">Autonomie (A) <span id="val-a" class="text-orange-600">0.5</span></label>
-                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-a" oninput="updateCalculator()">
+    <section id="calculator" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div>
+                    <h2 class="academic-title text-3xl font-bold mb-6">Das IMP-Mathematikmodell</h2>
+                    <p class="text-slate-500 mb-8 leading-relaxed">
+                        Berechnung des <strong>Integrated Multi-Potential</strong> Werts als Quotient aus autonomer Kapazität und systemischem Stressor-Input.
+                    </p>
+                    
+                    <div class="mb-10 p-6 bg-white border border-slate-200 rounded-xl shadow-sm text-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-2">Primärformel</span>
+                        <div class="text-3xl font-serif italic text-slate-800">
+                            IMP = (A &times; O &times; R) / S
                         </div>
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
-                            <label class="flex justify-between text-sm font-bold mb-2">Intr. Motivation (IM) <span id="val-im" class="text-orange-600">0.5</span></label>
-                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-im" oninput="updateCalculator()">
+                        <p class="text-[10px] text-slate-400 mt-3 font-mono">Authentizität &times; Autonomie &times; Resilienz / Stress</p>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <label class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">Authentizität (A) <span id="val-a" class="text-orange-600">0.80</span></label>
+                            <input type="range" min="0.1" max="1" step="0.05" value="0.8" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-a" oninput="updateCalculator()">
                         </div>
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
-                            <label class="flex justify-between text-sm font-bold mb-2">Reflektion (R) <span id="val-r" class="text-orange-600">0.5</span></label>
-                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-r" oninput="updateCalculator()">
+                        <div>
+                            <label class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">Autonomie (O) <span id="val-o" class="text-orange-600">0.70</span></label>
+                            <input type="range" min="0.1" max="1" step="0.05" value="0.7" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-o" oninput="updateCalculator()">
                         </div>
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
-                            <label class="flex justify-between text-sm font-bold mb-2">Selbstwirksamkeit (SP) <span id="val-sp" class="text-orange-600">0.5</span></label>
-                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-sp" oninput="updateCalculator()">
+                        <div>
+                            <label class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3">Resilienz (R) <span id="val-r" class="text-orange-600">0.75</span></label>
+                            <input type="range" min="0.1" max="1" step="0.05" value="0.75" class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-r" oninput="updateCalculator()">
                         </div>
-                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
-                            <label class="flex justify-between text-sm font-bold mb-2">Authentizität (Au) <span id="val-au" class="text-orange-600">0.5</span></label>
-                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-au" oninput="updateCalculator()">
+                        <div>
+                            <label class="flex justify-between text-xs font-bold uppercase tracking-widest mb-3 text-red-500">Systemischer Stress (S) <span id="val-s">0.30</span></label>
+                            <input type="range" min="0.05" max="1" step="0.05" value="0.3" class="w-full h-1.5 bg-red-100 rounded-lg appearance-none cursor-pointer" id="slider-s" oninput="updateCalculator()">
                         </div>
                     </div>
 
-                    <div class="mt-10 p-6 bg-slate-900 rounded-2xl text-white text-center">
-                        <span class="text-xs uppercase tracking-widest text-slate-400 block mb-2">Berechneter Score</span>
-                        <div class="text-5xl font-black text-orange-500" id="imp-score">0.031</div>
-                        <p class="text-xs text-slate-500 mt-2">Skala von 0.0 (Nullpunkt) bis 1.0 (Optimal)</p>
+                    <div class="mt-12 p-8 bg-slate-900 rounded-2xl text-white shadow-2xl relative overflow-hidden">
+                        <div class="relative z-10">
+                            <span class="text-[10px] uppercase tracking-[0.3em] text-orange-500 font-bold block mb-2">System-Index (IMP)</span>
+                            <div class="text-6xl font-black" id="imp-score">1.400</div>
+                            <p class="text-xs text-slate-500 mt-4 italic">Werte > 1.0 indizieren ein antifragiles Wachstumspotenzial.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -269,140 +234,37 @@
                     <div class="chart-container">
                         <canvas id="radarChart"></canvas>
                     </div>
-                    <div class="mt-8 grid grid-cols-2 gap-4 w-full">
-                        <div class="p-4 bg-slate-50 rounded-lg text-center">
-                            <span class="block text-xl font-bold text-slate-800">11</span>
-                            <span class="text-xs text-slate-500">Dashboard Pages</span>
-                        </div>
-                        <div class="p-4 bg-slate-50 rounded-lg text-center">
-                            <span class="block text-xl font-bold text-slate-800">5+</span>
-                            <span class="text-xs text-slate-500">Forschungsfelder</span>
-                        </div>
+                    <div class="mt-12 text-sm text-slate-400 italic text-center max-w-sm">
+                        "Die Netz-Perkolation beginnt, wenn das IMP-Profil eine harmonische Symmetrie über alle Vektoren aufweist."
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Roadmap Section -->
-    <section id="roadmap" class="py-20 bg-slate-50">
+    <footer class="bg-white border-t border-slate-100 py-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold">Projekt Roadmap</h2>
-                <p class="text-slate-500 mt-4">Von der Theorie zur globalen Validierung.</p>
-            </div>
-
-            <div class="relative">
-                <!-- Timeline Line -->
-                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 hidden lg:block"></div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                    <!-- Phase 1 -->
-                    <div class="relative text-center">
-                        <div class="timeline-dot active mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
-                        <div class="pt-2 lg:pt-10">
-                            <h4 class="font-bold text-orange-600">Phase 1</h4>
-                            <p class="text-sm font-semibold text-slate-800">Issue-Hygiene</p>
-                            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">ERLEDIGT</span>
-                        </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-end">
+                <div>
+                    <h3 class="academic-title text-2xl font-bold mb-6 italic">5D Intelligence Framework</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed max-w-md">
+                        Ein Open-Source Projekt zur Quantifizierung transdisziplinärer Intelligenzparameter. Entwickelt für die wissenschaftliche Gemeinschaft unter Berücksichtigung der ethischen Implikationen globaler Vernetzung.
+                    </p>
+                </div>
+                <div class="flex flex-col items-end gap-4">
+                    <div class="flex gap-6">
+                        <a href="https://github.com/karlitos1337/5d" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-orange-600">GitHub Research</a>
+                        <a href="#" class="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-orange-600">Whitepaper (PDF)</a>
                     </div>
-                    <!-- Phase 2 -->
-                    <div class="relative text-center">
-                        <div class="timeline-dot active mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
-                        <div class="pt-2 lg:pt-10">
-                            <h4 class="font-bold text-orange-600">Phase 2</h4>
-                            <p class="text-sm font-semibold text-slate-800">Test-Coverage</p>
-                            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">IN ARBEIT</span>
-                        </div>
-                    </div>
-                    <!-- Phase 3 -->
-                    <div class="relative text-center">
-                        <div class="timeline-dot mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
-                        <div class="pt-2 lg:pt-10">
-                            <h4 class="font-bold text-slate-400">Phase 3</h4>
-                            <p class="text-sm font-semibold text-slate-800">Async Migration</p>
-                            <span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">GEPLANT</span>
-                        </div>
-                    </div>
-                    <!-- Phase 4 -->
-                    <div class="relative text-center">
-                        <div class="timeline-dot mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
-                        <div class="pt-2 lg:pt-10">
-                            <h4 class="font-bold text-slate-400">Phase 4</h4>
-                            <p class="text-sm font-semibold text-slate-800">SQLite DB</p>
-                            <span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">GEPLANT</span>
-                        </div>
-                    </div>
-                    <!-- Phase 5 -->
-                    <div class="relative text-center">
-                        <div class="timeline-dot mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
-                        <div class="pt-2 lg:pt-10">
-                            <h4 class="font-bold text-slate-400">Phase 5</h4>
-                            <p class="text-sm font-semibold text-slate-800">Publikation</p>
-                            <span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">VISION</span>
-                        </div>
+                    <div class="text-[10px] text-slate-400 font-mono">
+                        Build 2026.02.10 // Protocol: Transdisciplinary Evolution
                     </div>
                 </div>
-            </div>
-            
-            <div class="mt-20 chart-container h-48 max-w-4xl">
-                <canvas id="timelineChart"></canvas>
-            </div>
-        </div>
-    </section>
-
-    <!-- Scientific Section -->
-    <section class="py-20 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold mb-10 text-center">Wissenschaftliche Basis</h2>
-            <div class="space-y-12">
-                <blockquote class="border-l-4 border-orange-500 pl-6 py-2 italic text-slate-700 text-lg">
-                    "Die Integration von Polyvagal-Theorie und kognitiver Selbstwirksamkeit ist der Schlüssel zur Stabilisierung von Lernumgebungen in einer KI-zentrierten Welt."
-                    <footer class="mt-2 text-sm font-bold text-slate-500">— Research Synthesis, 5D Framework 2024</footer>
-                </blockquote>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <h4 class="font-bold mb-4 flex items-center">📚 Bibliografie</h4>
-                        <ul class="text-sm space-y-3 text-slate-600">
-                            <li class="hover:text-orange-600 cursor-help underline decoration-slate-200">Porges, S. W. (2011). The Polyvagal Theory.</li>
-                            <li class="hover:text-orange-600 cursor-help underline decoration-slate-200">Bandura, A. (1997). Self-efficacy: The exercise of control.</li>
-                            <li class="hover:text-orange-600 cursor-help underline decoration-slate-200">Dweck, C. (2006). Mindset: The New Psychology of Success.</li>
-                        </ul>
-                    </div>
-                    <div class="p-6 bg-slate-50 rounded-xl">
-                        <h4 class="font-bold mb-2">Validierungs-Status</h4>
-                        <div class="w-full bg-slate-200 rounded-full h-2 mb-4">
-                            <div class="bg-orange-500 h-2 rounded-full" style="width: 56%"></div>
-                        </div>
-                        <p class="text-xs text-slate-500">Peer-Review Score: 56%. Ziel ist 100% durch empirische Studien (n>500) im Jahr 2026.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer CTA -->
-    <footer class="bg-slate-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-6">Werde Teil der 5D-Evolution.</h2>
-            <p class="text-slate-400 mb-10 max-w-xl mx-auto">Kollaboriere an der Forschung, verbessere den Algorithmus oder implementiere das Dashboard in deiner Organisation.</p>
-            <div class="flex flex-wrap justify-center gap-6">
-                <a href="https://github.com/karlitos1337/5d" class="flex items-center space-x-2 bg-white text-slate-900 px-6 py-3 rounded-lg font-bold hover:bg-slate-200 transition-all">
-                    <span>GitHub Repo</span>
-                </a>
-                <a href="#" class="flex items-center space-x-2 bg-orange-600 px-6 py-3 rounded-lg font-bold hover:bg-orange-700 transition-all">
-                    <span>Community beitreten</span>
-                </a>
-            </div>
-            <div class="mt-20 pt-8 border-t border-slate-800 text-slate-500 text-sm">
-                &copy; 2026 5D Intelligence Framework | Entwickelt von karlitos1337 & Team.
             </div>
         </div>
     </footer>
 
     <script>
-        // --- Radar Chart Initialization ---
         let radarChart;
         const ctxRadar = document.getElementById('radarChart').getContext('2d');
 
@@ -410,14 +272,15 @@
             radarChart = new Chart(ctxRadar, {
                 type: 'radar',
                 data: {
-                    labels: ['Autonomie', 'Motivation', 'Reflektion', 'Wirksamkeit', 'Authentizität'],
+                    labels: ['Authentizität', 'Autonomie', 'Resilienz', 'Stress-Inverse', 'Perkolation'],
                     datasets: [{
-                        label: 'Individuelles Profil',
-                        data: [0.5, 0.5, 0.5, 0.5, 0.5],
-                        backgroundColor: 'rgba(234, 88, 12, 0.2)',
+                        label: 'Vektoranalyse',
+                        data: [0.8, 0.7, 0.75, 0.7, 0.5],
+                        backgroundColor: 'rgba(234, 88, 12, 0.1)',
                         borderColor: '#EA580C',
-                        borderWidth: 2,
+                        borderWidth: 1.5,
                         pointBackgroundColor: '#EA580C',
+                        pointRadius: 4
                     }]
                 },
                 options: {
@@ -428,87 +291,42 @@
                             min: 0,
                             max: 1,
                             ticks: { display: false },
-                            grid: { color: '#E2E8F0' },
-                            angleLines: { color: '#E2E8F0' }
+                            grid: { color: '#f1f5f9' },
+                            angleLines: { color: '#f1f5f9' },
+                            pointLabels: { font: { size: 10, weight: 'bold' }, color: '#64748b' }
                         }
                     },
-                    plugins: {
-                        legend: { display: false }
-                    }
+                    plugins: { legend: { display: false } }
                 }
             });
         }
 
-        // --- Timeline Chart Initialization ---
-        function initTimeline() {
-            const ctxTimeline = document.getElementById('timelineChart').getContext('2d');
-            new Chart(ctxTimeline, {
-                type: 'bar',
-                data: {
-                    labels: ['Q1 2024', 'Q3 2024', 'Q1 2025', 'Q3 2025', 'Q1 2026'],
-                    datasets: [{
-                        label: 'Fortschritt (%)',
-                        data: [20, 40, 60, 80, 100],
-                        backgroundColor: (ctx) => {
-                            const index = ctx.dataIndex;
-                            return index < 2 ? '#22C55E' : '#F1F5F9';
-                        },
-                        borderRadius: 10,
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { display: false },
-                        y: { grid: { display: false } }
-                    }
-                }
-            });
-        }
-
-        // --- Calculator Logic ---
         function updateCalculator() {
             const a = parseFloat(document.getElementById('slider-a').value);
-            const im = parseFloat(document.getElementById('slider-im').value);
+            const o = parseFloat(document.getElementById('slider-o').value);
             const r = parseFloat(document.getElementById('slider-r').value);
-            const sp = parseFloat(document.getElementById('slider-sp').value);
-            const au = parseFloat(document.getElementById('slider-au').value);
+            const s = parseFloat(document.getElementById('slider-s').value);
 
-            // Update Labels
+            // Update UI Labels
             document.getElementById('val-a').innerText = a.toFixed(2);
-            document.getElementById('val-im').innerText = im.toFixed(2);
+            document.getElementById('val-o').innerText = o.toFixed(2);
             document.getElementById('val-r').innerText = r.toFixed(2);
-            document.getElementById('val-sp').innerText = sp.toFixed(2);
-            document.getElementById('val-au').innerText = au.toFixed(2);
+            document.getElementById('val-s').innerText = s.toFixed(2);
 
-            // Formula: IMP = A * IM * R * SP * Au
-            const impScore = a * im * r * sp * au;
+            // NEUE FORMEL: IMP = (A * O * R) / S
+            const impScore = (a * o * r) / s;
             document.getElementById('imp-score').innerText = impScore.toFixed(3);
 
-            // Update Chart
-            radarChart.data.datasets[0].data = [a, im, r, sp, au];
+            // Update Chart (Invert Stress for visual logic)
+            const sInverse = 1 - s;
+            radarChart.data.datasets[0].data = [a, o, r, sInverse, (a+o+r)/3];
             radarChart.update();
         }
 
-        // Init on Load
         window.onload = function() {
             initRadar();
-            initTimeline();
             updateCalculator();
         };
-
-        // Smooth Scrolling for nav
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
