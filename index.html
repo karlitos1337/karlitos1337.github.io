@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5D Intelligence Framework | Multidimensional Human Potential</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-neutral: #FDFCFB;
+            --accent-orange: #EA580C;
+            --text-main: #1E293B;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-neutral);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            border-color: var(--accent-orange);
+        }
+        .dimension-card {
+            perspective: 1000px;
+            height: 320px;
+        }
+        .dimension-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .dimension-card:hover .dimension-inner {
+            transform: rotateY(180deg);
+        }
+        .dimension-front, .dimension-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .dimension-back {
+            transform: rotateY(180deg);
+            background-color: #FFF7ED;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            height: 350px;
+        }
+        input[type="range"] {
+            accent-color: var(--accent-orange);
+        }
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #CBD5E1;
+            position: relative;
+            z-index: 10;
+        }
+        .timeline-dot.active {
+            background: var(--accent-orange);
+            box-shadow: 0 0 0 4px rgba(234, 88, 12, 0.2);
+        }
+    </style>
+    <!-- Chosen Palette: Warm Professionalism (Stone, Slate, Amber) -->
+    <!-- Application Structure Plan:
+         1. Hero: Einführung in das 5D-Konzept.
+         2. Dimensionen: Flip-Cards zur Erklärung der wissenschaftlichen Säulen.
+         3. IMP-Labor: Interaktiver Rechner mit Radar-Chart-Visualisierung.
+         4. Roadmap: Zeitstrahl des Fortschritts.
+         5. Wissenschaft: Zitate und bibliografische Belege.
+         Dieses Layout wurde gewählt, um von der Inspiration (Hero) über die Theorie (Dimensionen) direkt zur Anwendung (Rechner) zu führen.
+    -->
+    <!-- Visualization & Content Choices:
+         - IMP Score: Radar Chart (Chart.js) zeigt die Balance der Faktoren.
+         - Roadmap: Horizontale Timeline mit Status-Checkmarks.
+         - Icons: Unicode Zeichen (🧠, ⚖️, etc.) für semantische Klarheit ohne SVG-Last.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold tracking-tighter text-orange-600">5D<span class="text-slate-800">Intelligence</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <a href="#dimensions" class="hover:text-orange-600 transition-colors">Dimensionen</a>
+                    <a href="#calculator" class="hover:text-orange-600 transition-colors">IMP-Rechner</a>
+                    <a href="#roadmap" class="hover:text-orange-600 transition-colors">Roadmap</a>
+                    <a href="https://github.com/karlitos1337/5d" target="_blank" class="px-4 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-all">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative py-20 lg:py-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
+                Menschliches Potenzial ist <br>
+                <span class="text-orange-600">Multidimensional.</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-lg lg:text-xl text-slate-500 mb-10 leading-relaxed">
+                Das 5D-Intelligence-Framework ist ein wissenschaftliches Modell zur Messung und Entwicklung von Intelligenz über Neurobiologie, Psychologie, Philosophie, Ökonomie und Technologie.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://github.com/karlitos1337/5d/blob/main/README.md" class="px-8 py-4 bg-orange-600 text-white font-bold rounded-xl shadow-lg shadow-orange-200 hover:bg-orange-700 hover:-translate-y-1 transition-all">Dokumentation</a>
+                <a href="#calculator" class="px-8 py-4 bg-white border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-slate-50 transition-all">Dashboard testen</a>
+            </div>
+        </div>
+        <!-- Hintergrund-Deko (Canvas/CSS) -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-0 opacity-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-orange-300 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-300 rounded-full blur-3xl"></div>
+        </div>
+    </header>
+
+    <!-- 5 Dimensions Section -->
+    <section id="dimensions" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900">Die 5 Säulen der Intelligenz</h2>
+                <p class="text-slate-500 mt-4">Ein holistischer Ansatz zur Operationalisierung menschlicher Kapazität.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Card 1 -->
+                <div class="dimension-card">
+                    <div class="dimension-inner">
+                        <div class="dimension-front glass-card">
+                            <span class="text-5xl mb-4">🧠</span>
+                            <h3 class="font-bold text-lg">Neurobiologie</h3>
+                            <p class="text-xs text-slate-400 mt-2">Das Fundament des Nervensystems.</p>
+                        </div>
+                        <div class="dimension-back border-orange-200 border">
+                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
+                            <p class="text-sm text-slate-600">Polyvagal-Theorie, Neuroplastizität und die biologische Basis von Regulation.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="dimension-card">
+                    <div class="dimension-inner">
+                        <div class="dimension-front glass-card">
+                            <span class="text-5xl mb-4">🧩</span>
+                            <h3 class="font-bold text-lg">Psychologie</h3>
+                            <p class="text-xs text-slate-400 mt-2">Kognition & Emotion.</p>
+                        </div>
+                        <div class="dimension-back border-orange-200 border">
+                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
+                            <p class="text-sm text-slate-600">Resilienz, Growth Mindset und psychologische Sicherheit als Treiber.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="dimension-card">
+                    <div class="dimension-inner">
+                        <div class="dimension-front glass-card">
+                            <span class="text-5xl mb-4">⚖️</span>
+                            <h3 class="font-bold text-lg">Philosophie</h3>
+                            <p class="text-xs text-slate-400 mt-2">Sinn & Ethik.</p>
+                        </div>
+                        <div class="dimension-back border-orange-200 border">
+                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
+                            <p class="text-sm text-slate-600">Existenzielle Ausrichtung, Wertekompass und die Frage nach dem 'Warum'.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="dimension-card">
+                    <div class="dimension-inner">
+                        <div class="dimension-front glass-card">
+                            <span class="text-5xl mb-4">📈</span>
+                            <h3 class="font-bold text-lg">Ökonomie</h3>
+                            <p class="text-xs text-slate-400 mt-2">Wertschöpfung & Ressourcen.</p>
+                        </div>
+                        <div class="dimension-back border-orange-200 border">
+                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
+                            <p class="text-sm text-slate-600">Effizienz in der Ressourcennutzung und nachhaltiger Output im System.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="dimension-card">
+                    <div class="dimension-inner">
+                        <div class="dimension-front glass-card">
+                            <span class="text-5xl mb-4">💻</span>
+                            <h3 class="font-bold text-lg">Technologie</h3>
+                            <p class="text-xs text-slate-400 mt-2">Werkzeuge & Augmentierung.</p>
+                        </div>
+                        <div class="dimension-back border-orange-200 border">
+                            <h4 class="font-bold mb-2 text-orange-600">Fokus</h4>
+                            <p class="text-sm text-slate-600">KI-Kollaboration, Datenkompetenz und digitale Selbstwirksamkeit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMP Formula Section -->
+    <section id="calculator" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Der IMP-Rechner</h2>
+                    <p class="text-slate-500 mb-8 leading-relaxed">
+                        Die <strong>Integrated Multi-Potential (IMP)</strong> Formel berechnet die Gesamtkapazität eines Individuums oder Systems basierend auf fünf Schlüsselvariablen: <br>
+                        <code class="bg-orange-50 text-orange-700 px-2 py-1 rounded mt-2 inline-block">IMP = A × IM × R × SP × Au</code>
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <label class="flex justify-between text-sm font-bold mb-2">Autonomie (A) <span id="val-a" class="text-orange-600">0.5</span></label>
+                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-a" oninput="updateCalculator()">
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <label class="flex justify-between text-sm font-bold mb-2">Intr. Motivation (IM) <span id="val-im" class="text-orange-600">0.5</span></label>
+                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-im" oninput="updateCalculator()">
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <label class="flex justify-between text-sm font-bold mb-2">Reflektion (R) <span id="val-r" class="text-orange-600">0.5</span></label>
+                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-r" oninput="updateCalculator()">
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <label class="flex justify-between text-sm font-bold mb-2">Selbstwirksamkeit (SP) <span id="val-sp" class="text-orange-600">0.5</span></label>
+                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-sp" oninput="updateCalculator()">
+                        </div>
+                        <div class="p-4 rounded-xl border border-slate-100 bg-slate-50">
+                            <label class="flex justify-between text-sm font-bold mb-2">Authentizität (Au) <span id="val-au" class="text-orange-600">0.5</span></label>
+                            <input type="range" min="0" max="1" step="0.05" value="0.5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer" id="slider-au" oninput="updateCalculator()">
+                        </div>
+                    </div>
+
+                    <div class="mt-10 p-6 bg-slate-900 rounded-2xl text-white text-center">
+                        <span class="text-xs uppercase tracking-widest text-slate-400 block mb-2">Berechneter Score</span>
+                        <div class="text-5xl font-black text-orange-500" id="imp-score">0.031</div>
+                        <p class="text-xs text-slate-500 mt-2">Skala von 0.0 (Nullpunkt) bis 1.0 (Optimal)</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center">
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                    <div class="mt-8 grid grid-cols-2 gap-4 w-full">
+                        <div class="p-4 bg-slate-50 rounded-lg text-center">
+                            <span class="block text-xl font-bold text-slate-800">11</span>
+                            <span class="text-xs text-slate-500">Dashboard Pages</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-lg text-center">
+                            <span class="block text-xl font-bold text-slate-800">5+</span>
+                            <span class="text-xs text-slate-500">Forschungsfelder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold">Projekt Roadmap</h2>
+                <p class="text-slate-500 mt-4">Von der Theorie zur globalen Validierung.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -translate-y-1/2 hidden lg:block"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <!-- Phase 1 -->
+                    <div class="relative text-center">
+                        <div class="timeline-dot active mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
+                        <div class="pt-2 lg:pt-10">
+                            <h4 class="font-bold text-orange-600">Phase 1</h4>
+                            <p class="text-sm font-semibold text-slate-800">Issue-Hygiene</p>
+                            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">ERLEDIGT</span>
+                        </div>
+                    </div>
+                    <!-- Phase 2 -->
+                    <div class="relative text-center">
+                        <div class="timeline-dot active mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
+                        <div class="pt-2 lg:pt-10">
+                            <h4 class="font-bold text-orange-600">Phase 2</h4>
+                            <p class="text-sm font-semibold text-slate-800">Test-Coverage</p>
+                            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full">IN ARBEIT</span>
+                        </div>
+                    </div>
+                    <!-- Phase 3 -->
+                    <div class="relative text-center">
+                        <div class="timeline-dot mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
+                        <div class="pt-2 lg:pt-10">
+                            <h4 class="font-bold text-slate-400">Phase 3</h4>
+                            <p class="text-sm font-semibold text-slate-800">Async Migration</p>
+                            <span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">GEPLANT</span>
+                        </div>
+                    </div>
+                    <!-- Phase 4 -->
+                    <div class="relative text-center">
+                        <div class="timeline-dot mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
+                        <div class="pt-2 lg:pt-10">
+                            <h4 class="font-bold text-slate-400">Phase 4</h4>
+                            <p class="text-sm font-semibold text-slate-800">SQLite DB</p>
+                            <span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">GEPLANT</span>
+                        </div>
+                    </div>
+                    <!-- Phase 5 -->
+                    <div class="relative text-center">
+                        <div class="timeline-dot mx-auto mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"></div>
+                        <div class="pt-2 lg:pt-10">
+                            <h4 class="font-bold text-slate-400">Phase 5</h4>
+                            <p class="text-sm font-semibold text-slate-800">Publikation</p>
+                            <span class="text-[10px] bg-slate-200 text-slate-500 px-2 py-0.5 rounded-full">VISION</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 chart-container h-48 max-w-4xl">
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scientific Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-10 text-center">Wissenschaftliche Basis</h2>
+            <div class="space-y-12">
+                <blockquote class="border-l-4 border-orange-500 pl-6 py-2 italic text-slate-700 text-lg">
+                    "Die Integration von Polyvagal-Theorie und kognitiver Selbstwirksamkeit ist der Schlüssel zur Stabilisierung von Lernumgebungen in einer KI-zentrierten Welt."
+                    <footer class="mt-2 text-sm font-bold text-slate-500">— Research Synthesis, 5D Framework 2024</footer>
+                </blockquote>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4 flex items-center">📚 Bibliografie</h4>
+                        <ul class="text-sm space-y-3 text-slate-600">
+                            <li class="hover:text-orange-600 cursor-help underline decoration-slate-200">Porges, S. W. (2011). The Polyvagal Theory.</li>
+                            <li class="hover:text-orange-600 cursor-help underline decoration-slate-200">Bandura, A. (1997). Self-efficacy: The exercise of control.</li>
+                            <li class="hover:text-orange-600 cursor-help underline decoration-slate-200">Dweck, C. (2006). Mindset: The New Psychology of Success.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-xl">
+                        <h4 class="font-bold mb-2">Validierungs-Status</h4>
+                        <div class="w-full bg-slate-200 rounded-full h-2 mb-4">
+                            <div class="bg-orange-500 h-2 rounded-full" style="width: 56%"></div>
+                        </div>
+                        <p class="text-xs text-slate-500">Peer-Review Score: 56%. Ziel ist 100% durch empirische Studien (n>500) im Jahr 2026.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer class="bg-slate-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6">Werde Teil der 5D-Evolution.</h2>
+            <p class="text-slate-400 mb-10 max-w-xl mx-auto">Kollaboriere an der Forschung, verbessere den Algorithmus oder implementiere das Dashboard in deiner Organisation.</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="https://github.com/karlitos1337/5d" class="flex items-center space-x-2 bg-white text-slate-900 px-6 py-3 rounded-lg font-bold hover:bg-slate-200 transition-all">
+                    <span>GitHub Repo</span>
+                </a>
+                <a href="#" class="flex items-center space-x-2 bg-orange-600 px-6 py-3 rounded-lg font-bold hover:bg-orange-700 transition-all">
+                    <span>Community beitreten</span>
+                </a>
+            </div>
+            <div class="mt-20 pt-8 border-t border-slate-800 text-slate-500 text-sm">
+                &copy; 2026 5D Intelligence Framework | Entwickelt von karlitos1337 & Team.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Radar Chart Initialization ---
+        let radarChart;
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+
+        function initRadar() {
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Autonomie', 'Motivation', 'Reflektion', 'Wirksamkeit', 'Authentizität'],
+                    datasets: [{
+                        label: 'Individuelles Profil',
+                        data: [0.5, 0.5, 0.5, 0.5, 0.5],
+                        backgroundColor: 'rgba(234, 88, 12, 0.2)',
+                        borderColor: '#EA580C',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#EA580C',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 1,
+                            ticks: { display: false },
+                            grid: { color: '#E2E8F0' },
+                            angleLines: { color: '#E2E8F0' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // --- Timeline Chart Initialization ---
+        function initTimeline() {
+            const ctxTimeline = document.getElementById('timelineChart').getContext('2d');
+            new Chart(ctxTimeline, {
+                type: 'bar',
+                data: {
+                    labels: ['Q1 2024', 'Q3 2024', 'Q1 2025', 'Q3 2025', 'Q1 2026'],
+                    datasets: [{
+                        label: 'Fortschritt (%)',
+                        data: [20, 40, 60, 80, 100],
+                        backgroundColor: (ctx) => {
+                            const index = ctx.dataIndex;
+                            return index < 2 ? '#22C55E' : '#F1F5F9';
+                        },
+                        borderRadius: 10,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // --- Calculator Logic ---
+        function updateCalculator() {
+            const a = parseFloat(document.getElementById('slider-a').value);
+            const im = parseFloat(document.getElementById('slider-im').value);
+            const r = parseFloat(document.getElementById('slider-r').value);
+            const sp = parseFloat(document.getElementById('slider-sp').value);
+            const au = parseFloat(document.getElementById('slider-au').value);
+
+            // Update Labels
+            document.getElementById('val-a').innerText = a.toFixed(2);
+            document.getElementById('val-im').innerText = im.toFixed(2);
+            document.getElementById('val-r').innerText = r.toFixed(2);
+            document.getElementById('val-sp').innerText = sp.toFixed(2);
+            document.getElementById('val-au').innerText = au.toFixed(2);
+
+            // Formula: IMP = A * IM * R * SP * Au
+            const impScore = a * im * r * sp * au;
+            document.getElementById('imp-score').innerText = impScore.toFixed(3);
+
+            // Update Chart
+            radarChart.data.datasets[0].data = [a, im, r, sp, au];
+            radarChart.update();
+        }
+
+        // Init on Load
+        window.onload = function() {
+            initRadar();
+            initTimeline();
+            updateCalculator();
+        };
+
+        // Smooth Scrolling for nav
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
